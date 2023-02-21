@@ -1,9 +1,8 @@
-import java.util.Scanner;
+import java.util.*;
 
 /*
-* ROCK PAPER SCISSORS: Phase 1
-* Single unfair game. Computer always beats the user.
-* Take user input and then pick winning move.
+* ROCK PAPER SCISSORS: Phase 2
+* Single fair game. Computer picks move at random
 * */
 
 public class Main {
@@ -12,22 +11,38 @@ public class Main {
                 "\n---------------------------------------------------------------------");
         Scanner scanner = new Scanner(System.in);
 
-        // user move
+        // gameplay
         String userMove = scanner.nextLine().toLowerCase();
-        String compMove;
+        String compMove = computerMove();
+        gameWinner(userMove, compMove);
 
-        // pick computer based on user
-        if (userMove.equals("paper")) {
-            compMove = "scissors";
-        } else if (userMove.equals("scissors")) {
-            compMove = "rock";
-        } else {
-            compMove = "paper";
-        }
-
-        // output
-        System.out.println("Sorry, but the computer chose " + compMove);
+        // game over output
         System.out.println("THANK YOU FOR PLAYING!" +
                 "\n---------------------------------------------------------------------");
+    }
+    // RANDOMLY SELECT COMPUTER MOVE
+    public static String computerMove() {
+        String[] arrMoves = {"rock", "paper", "scissors"};
+        Random random = new Random();
+        int randomNum = random.nextInt(3); // randomly generates int 0-2
+        return arrMoves[randomNum];
+    }
+
+    // DETERMINE THE WINNER
+    public static void gameWinner(String userMove, String compMove) {
+        // DRAW
+        if (userMove.equals(compMove)) {
+            System.out.println("There is a draw (" + userMove + ")");
+        }
+        // USER WINS
+        else if (((userMove.equals("rock") && compMove.equals("scissors")) ||
+                userMove.equals("paper") && compMove.equals("rock")) ||
+                (userMove.equals("scissors") && compMove.equals("paper"))) {
+            System.out.println("Well done. The computer chose " + compMove + " and failed");
+        }
+        // COMP WINS
+        else {
+            System.out.println("Sorry, but the computer chose " + compMove);
+        }
     }
 }
