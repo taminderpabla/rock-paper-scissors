@@ -1,25 +1,47 @@
 import java.util.*;
 
 /*
-* ROCK PAPER SCISSORS: Phase 2
-* Single fair game. Computer picks move at random
+* ROCK PAPER SCISSORS: Phase 3
+* Play multiple games.
 * */
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("ROCK PAPER SCISSORS " +
                 "\n---------------------------------------------------------------------");
-        Scanner scanner = new Scanner(System.in);
+        System.out.println("Rulebook: rock, paper, scissor\nEnd Game: !exit \n");
+        boolean singleMove;
+        while(true) {
+            // USER MOVE
+            String userMove;
+            do {
+                System.out.println("Please make a move OR end game: ");
+                Scanner scanner = new Scanner(System.in);
+                userMove = scanner.nextLine().toLowerCase();
+                // validate
+                switch (userMove) {
+                    case "!exit", "rock", "paper", "scissors" -> singleMove = false;
+                    default -> {
+                        System.out.println("Invalid input");
+                        singleMove = true;
+                    }
+                }
+            } while (singleMove);
 
-        // gameplay
-        String userMove = scanner.nextLine().toLowerCase();
-        String compMove = computerMove();
-        gameWinner(userMove, compMove);
+            // STOP GAME
+            if(userMove.equals("!exit")) {
+                break;
+            }
+            // GAMEPLAY
+            String compMove = computerMove();
+            gameWinner(userMove, compMove);
+        }
 
         // game over output
         System.out.println("THANK YOU FOR PLAYING!" +
                 "\n---------------------------------------------------------------------");
     }
+
     // RANDOMLY SELECT COMPUTER MOVE
     public static String computerMove() {
         String[] arrMoves = {"rock", "paper", "scissors"};
