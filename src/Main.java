@@ -52,19 +52,19 @@ public class Main {
 
     // DETERMINE THE WINNER
     public static void gameWinner(String userMove, String compMove) {
-        // DRAW
+        // draw
         if (userMove.equals(compMove)) {
-            System.out.println("There is a draw (" + userMove + ")");
+            System.out.printf("Draw! (%s)%n%n", compMove);
         }
-        // USER WINS
+        // user wins
         else if (((userMove.equals("rock") && compMove.equals("scissors")) ||
                 userMove.equals("paper") && compMove.equals("rock")) ||
                 (userMove.equals("scissors") && compMove.equals("paper"))) {
-            System.out.println("Well done. The computer chose " + compMove + " and failed");
+            System.out.printf("You Win! Computer(%s)%n%n", compMove);
         }
-        // COMP WINS
+        // computer wins
         else {
-            System.out.println("Sorry, but the computer chose " + compMove);
+            System.out.printf("Sorry, Computer Wins! Computer(%s)%n%n", compMove);
         }
     }
 }
