@@ -1,8 +1,9 @@
+import java.io.IOException;
 import java.util.*;
 
 /*
-* ROCK PAPER SCISSORS: Phase 4 (a)
-* Player rating per match
+* ROCK PAPER SCISSORS: Phase 4 (b)
+* Load historical rating from rating.txt file if exists
 * */
 
 // Driver program
@@ -20,8 +21,12 @@ public class Main {
         System.out.println("Enter your name: ");
         String userName = scanner.nextLine().toUpperCase().trim(); //usernames are only uppercase
         game.matchBanner(userName); // banner
-        // Initialize player rating
-        int rating; // VARIABLE to initialize historical rating from "ratings.txt"
+        // Initialize rating by checking IF returning player
+        try {
+            game.historicalPlayerRating(userName); // calling method to determine rating
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         gameplay:
         while (true) {
@@ -34,8 +39,7 @@ public class Main {
                     game.playMatch(userMove); // GAMEPLAY
                     break;
                 case "!rating":
-                    rating = Game.getRating(); // get current/updated rating
-                    System.out.println("Current rating: " + rating);
+                    System.out.println("Current rating: " + game.getRating()); // display player's rating
                     break;
                 case "!exit":
                     break gameplay; // stop match repetition

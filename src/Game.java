@@ -1,10 +1,13 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Random;
 
 // Game logic
 class Game {
-    static final String[] arrMoves = {"rock", "paper", "scissors"};
-    static int rating = 0;
+    protected final String[] arrMoves = {"rock", "paper", "scissors"};
+    protected int rating;
 
     // RULEBOOK
     public void printRulebook() {
@@ -47,18 +50,33 @@ class Game {
         }
     }
 
-    // RETURNS RATING
-    public static int getRating() {
-        return rating; // updated rating
+    // Getter / Setter for Rating
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     // SEARCH: "ratings.txt" for specified player rating
-    public int historicalPlayerRating(String userName) {
-        return 0;  // default return
+    public void historicalPlayerRating(String userName) throws IOException {
+        int histRating = rating; // default 0 rating
+        // checking file
+        File file = new File("ratings.txt");
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
+        while (br.ready()) {
+            String input = br.readLine();
+            String[] split = input.split(" ");
+            if (split[0].equals(userName)) {
+                //br.close();
+                histRating = Integer.parseInt(split[1]); // historical rating
+            }
+        }
+        setRating(histRating); // update rating (default OR historical)
     }
 
     // UPDATES RATING FILE
-    public void updateRecords() {
-
-    }
+    //public void updateRecords() {}
 }
