@@ -34,7 +34,7 @@ class Game {
         String compMove = computerMove();
         // draw
         if (userMove.equals(compMove)) {
-            System.out.printf("Draw! (%s)%n%n", compMove);
+            System.out.printf("Tie! (%s)%n%n", compMove);
             rating += 5;
         }
         // user wins

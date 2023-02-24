@@ -27,7 +27,7 @@ Basic GamePlay Operations:
 
 ### Execution Procedure
 Instructions to play the game through command line:
-1. Clone the repository (shown using SSH):
+1. Clone the repository to specified location (shown using SSH):
 ```
     $ git clone git@github.com:taminderpabla/rock-paper-scissors.git
 ```
